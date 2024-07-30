@@ -14,9 +14,8 @@ import classes from "./categoryPage.module.css";
 import { CategoryPageSkeleton } from "../../component/skeleton/CategoryPageSkeleton";
 import { toast } from "react-toastify";
 import { FileUploadInput } from "../../component/fileUploadInput/FileUploadInput";
-import { downloadTemplate } from "../../http-request/downLoadTemplate";
 import { uploadImageRequest } from "../../http-request/uploadFile";
-import { useUploadFileMutation } from "../../services/uploadFileApiSlice";
+
 
 export const CategoryPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +24,7 @@ export const CategoryPage = () => {
   const category = params.category;
 
   const appliedFilters = useSelector(selectCategoryState);
-  const [uploadFile] = useUploadFileMutation();
+ 
 
   const { isSuccess, error } = useGetCategoryListQuery(appliedFilters, {
     skip: !appliedFilters.category,

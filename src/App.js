@@ -10,10 +10,11 @@ import { CategoryPage } from "./pages/category/CategoryPage";
 import { ErrorPage } from "./pages/error/ErrorPage";
 import { RootLayout } from "./pages/RootLayout";
 
+
 const router = createBrowserRouter([
   // { path: "/", element: <LoginPage /> },
   {
-    path: "/",
+    path: "/seller-pro",
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
