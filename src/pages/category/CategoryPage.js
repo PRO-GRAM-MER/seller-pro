@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { FileUploadInput } from "../../component/fileUploadInput/FileUploadInput";
 import { downloadTemplate } from "../../http-request/downLoadTemplate";
 import { uploadImageRequest } from "../../http-request/uploadFile";
+import { useUploadFileMutation } from "../../services/uploadFileApiSlice";
 
 export const CategoryPage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const CategoryPage = () => {
   const category = params.category;
 
   const appliedFilters = useSelector(selectCategoryState);
+  const [uploadFile] = useUploadFileMutation();
 
   const { isSuccess, error } = useGetCategoryListQuery(appliedFilters, {
     skip: !appliedFilters.category,
@@ -39,16 +41,26 @@ export const CategoryPage = () => {
         category: category,
       })
     );
-  }, [category, dispatch, error, tableData.length]);
+  }, [category, dispatch, error]);
 
   const handleFileChange = async (event) => {
     const selectedFile = event.target.files[0];
 
     try {
       const response = await uploadImageRequest(selectedFile, category);
+      console.log(response)
+
+      
     } catch (error) {
-      if (error.response && error.response.data.message.displayMessage) {
+      if (error.message) {
+
+        console.log(error.message)
+        // Handle net::ERR_FAILED error
+        
+      
       } else {
+        // Handle other errors
+       
       }
     } finally {
       event.target.value = null;
